@@ -14,7 +14,9 @@
 #include <fstream>
 #include <cmath>
 #include "burger.h"
-#include "burgermeister.h"
+//#include "burgermeister.h"
+class BurgerMeister;
+
 using namespace std;
 
 // Numerical Constants
@@ -37,14 +39,21 @@ const double MIN_CASH = 25.0;
 const double MAX_CASH = 75.0;
 // Health
 const int MAX_HEALTH = 100;
-// Burger Class
+// Vomit Dialogue
+const string VOMIT_DIALOGUE[4] = {
+                                  "BLEEHHLECH",
+                                  "GURGLAHCH",
+                                  "PAGHLAECH",
+                                  "JELECHAAM"}
 
+// Customer Class
 class Customer
 {
   public:
     // To use for storing previously used names
     static int cNamesUsed[CONTESTANTS];
     static int cNumNamesUsed;
+    static int cAreLiving;
     static BurgerMeister Krusty;
 
     // Constructors
@@ -56,12 +65,13 @@ class Customer
     void toss();
 
     // Get Value Functions
-    int getWeight();
-    short getChol();
-    double getCash();
-    bool getAlive();
-    void getName();
-    int getHealth();
+    int getNumLiving(Customer contestants[]);
+    int getWeight() const;
+    short getChol() const;
+    double getCash() const;
+    bool getAlive() const;
+    void getName() const;
+    int getHealth() const;
   private:
     int cWeight;
     short cCholesterolLevel;

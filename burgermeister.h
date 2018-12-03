@@ -10,7 +10,9 @@
 
 #include <iostream>
 #include <string>
+#include "burger.h"
 #include "customer.h"
+
 using namespace std;
 
 // Constants
@@ -27,10 +29,10 @@ class BurgerMeister
     BurgerMeister& operator += (float cash);
     BurgerMeister& operator -= (float cash);
     // BurgerMeister Actions
-    void disqualifyContestant(Customer c);
+    void disqualifyContestant(Customer& c);
     // Get Functions
-    string getName();
-    double getCash();
+    string getName() const;
+    double getCash() const;
   private:
     string bmName;
     double bmCash;

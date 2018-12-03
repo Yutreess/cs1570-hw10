@@ -33,7 +33,7 @@ BurgerMeister& BurgerMeister::operator -= (float cash)
   return *this;
 }
 
-void BurgerMeister::disqualifyContestant(Customer c)
+void BurgerMeister::disqualifyContestant(Customer& c)
 {
   //*this += c.getCash();
   c.getName();
@@ -42,12 +42,12 @@ void BurgerMeister::disqualifyContestant(Customer c)
 
 // Get Functions
 
-string BurgerMeister::getName()
+string BurgerMeister::getName() const
 {
   return bmName;
 }
 
-double BurgerMeister::getCash()
+double BurgerMeister::getCash() const
 {
   return bmCash;
 }
@@ -69,6 +69,6 @@ void feedCustomers(Customer contestants[])
     << burg.getName() << endl;
 
     // Output customer stats
-    //cout << contestants[i] << endl;
+    cout << "-----" << contestants[i] << endl;
   }
 }

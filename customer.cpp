@@ -7,11 +7,17 @@
 
 
 #include "customer.h"
+#include "burgermeister.h"
 using namespace std;
 
 // Initialize Array and its Counter
 int Customer::cNamesUsed[CONTESTANTS];
 int Customer::cNumNamesUsed = 0;
+
+// Number of Living Customers
+int Customer::cAreLiving = CONTESTANTS;
+
+// Contest BurgerMeister
 BurgerMeister Customer::Krusty;
 
 // Non-Member Functions
@@ -107,7 +113,16 @@ void Customer::eat(Burger burg)
   }
   else if(burg.getPathogen())
   {
-    cIsAlive = false;
+    if(randInterval(1, 101) > cHealth)
+      cIsAlive = false;
+    else
+    {
+      // Cut Health in Half
+      cHealth /= 2;
+      // Vomits
+
+    }
+
   }
   else
   {
@@ -149,27 +164,38 @@ void Customer::eat(Burger burg)
 
 // Get Value Functions
 
-int Customer::getWeight()
+int getNumLiving(Customer contestants[])
+{
+  int numAlive = 0;
+  for(int i = 0; i < CONTESTANTS; i++)
+  {
+    if(contestants[i].getAlive())
+      numAlive++;
+  }
+  return numAlive;
+}
+
+int Customer::getWeight() const
 {
   return cWeight;
 }
 
-short Customer::getChol()
+short Customer::getChol() const
 {
   return cCholesterolLevel;
 }
 
-double Customer::getCash()
+double Customer::getCash() const
 {
   return cCash;
 }
 
-bool Customer::getAlive()
+bool Customer::getAlive() const
 {
   return cIsAlive;
 }
 
-void Customer::getName()
+void Customer::getName() const
 {
   int i = 0;
   while (cName[i] != '\0')
@@ -179,7 +205,7 @@ void Customer::getName()
   }
 }
 
-int Customer::getHealth()
+int Customer::getHealth() const
 {
   return cHealth;
 }
