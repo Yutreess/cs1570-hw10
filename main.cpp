@@ -8,9 +8,10 @@
 #include <string>
 #include <iostream>
 #include <cstdlib>
+using namespace std;
+
 #include "burgermeister.h"
 #include "customer.h"
-using namespace std;
 
 int main()
 {
@@ -21,8 +22,7 @@ int main()
   int round = 1;
 
   // Array of Contestants
-  // (CONTESTANTS defined in customer.h)
-  Customer contestants[CONTESTANTS];
+  Contestants contestants;
 
   // Contest Burgermeister
   //BurgerMeister Krusty;
@@ -37,9 +37,9 @@ int main()
 
   // Print Contestants
   cout << "The Contestants Are:" << endl;
-  for(int i = 0; i < CONTESTANTS; i++)
-    cout << i+1 << ":\t"
-    << contestants[i] << endl;
+  int i = 1;
+  for(Customer& cus : contestants)
+    cout << i++ << ":\t" << cus << endl;
 
   // Play rounds
   cout << "------------------------ "

@@ -6,7 +6,6 @@
 // Description:
 
 #include "burgermeister.h"
-using namespace std;
 
 ostream& operator << (ostream& os, BurgerMeister& bm)
 {
@@ -40,35 +39,22 @@ void BurgerMeister::disqualifyContestant(Customer& c)
   cout << " is disqualified!" << endl;
 }
 
-// Get Functions
-
-string BurgerMeister::getName() const
-{
-  return bmName;
-}
-
-double BurgerMeister::getCash() const
-{
-  return bmCash;
-}
-
 // Non-Member Functions
 
-void feedCustomers(Customer contestants[])
+void feedCustomers(Contestants& con)
 {
   Burger burg;
-
-  for(int i = 0; i < CONTESTANTS; i++)
+  for(Customer& cus : con)
   {
     // Contestant Eats the burger
-    contestants[i].eat(burg);
+    cus.eat(burg);
 
     // Output name of the contestant who ate
-    contestants[i].getName();
+    cus.getName();
     cout << " eats "
     << burg.getName() << endl;
 
     // Output customer stats
-    cout << "-----" << contestants[i] << endl;
+    cout << "-----" << cus << endl;
   }
 }

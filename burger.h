@@ -18,12 +18,12 @@ using namespace std;
 const string DEFAULT = "Krusty";
 const string BURGER  = "Burger";
 // Burger ingreedient costs
-const float PICKLE_PRICE = 0.25;
-const float PATTY_PRICE  = 0.75;
-const float BACON_PRICE  = 0.50;
-const float BUN_PRICE    = 0.50;
-const float CHEESE_PRICE = 0.25;
-const float SAUCE_PRICE  = 0.10;
+constexpr float PICKLE_PRICE = 0.25;
+constexpr float PATTY_PRICE  = 0.75;
+constexpr float BACON_PRICE  = 0.50;
+constexpr float BUN_PRICE    = 0.50;
+constexpr float CHEESE_PRICE = 0.25;
+constexpr float SAUCE_PRICE  = 0.10;
 // Name per # of Patties
 const string SINGLE    = "Single";
 const string DOUBLE    = "Double";
@@ -68,23 +68,24 @@ class Burger
            const bool cheese, const bool sauce, const bool pathogen);
     Burger();
     // Set Functions
-    void setNumPatties(const int patties);
-    void setNumBacon(const int bacon);
-    void setNumPickles(const int pickles);
-    void setCheese(const bool cheese);
-    void setSpecialSauce(const bool sauce);
-    void setPathogen(const bool pathogen);
+    void setNumPatties(const int patties){ bNumPatties = patties; }
+    void setNumBacon(const int bacon) { bNumBacon = bacon; }
+    void setNumPickles(const int pickles) { bNumPickles = pickles; }
+    void setCheese(const bool cheese) { bHasCheese = cheese; }
+    void setSpecialSauce(const bool sauce) { bHasSpecialSauce = sauce; }
+    void setPathogen(const bool pathogen) { bHasPathogen = pathogen; }
     void setName();
     void setPrice();
+
     // Get Functions
-    int getNumPatties();
-    int getNumBacon();
-    int getNumPickles();
-    double getPrice();
-    bool getCheese();
-    bool getSpecialSauce();
-    bool getPathogen();
-    string getName();
+    int getNumPatties() { return bNumPatties; }
+    int getNumBacon() { return bNumBacon; }
+    int getNumPickles() { return bNumPickles; }
+    double getPrice() { return bPrice; }
+    bool getCheese() { return bHasCheese; }
+    bool getSpecialSauce() { return bHasSpecialSauce; }
+    bool getPathogen() { return bHasPathogen; }
+    string getName() { return bName; }
   private:
     int bNumPatties;
     int bNumBacon;

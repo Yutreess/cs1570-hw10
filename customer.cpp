@@ -5,23 +5,24 @@
 // File:         customer.cpp
 // Description:
 
+// cmath is included elsewhere, we do this because it defined M_PI for us, M_PI = 3.14... bla bla
+#define _USE_MATH_DEFINES 1
 
+#include "types.h"
 #include "customer.h"
 #include "burgermeister.h"
 using namespace std;
 
 // Initialize Array and its Counter
-int Customer::cNamesUsed[CONTESTANTS];
-int Customer::cNumNamesUsed = 0;
+std::vector<int> Customer::cNamesUsed;
 
 // Number of Living Customers
-int Customer::cAreLiving = CONTESTANTS;
+int Customer::cAreLiving = MAX_CONTESTANTS;
 
 // Contest BurgerMeister
 BurgerMeister Customer::Krusty;
 
 // Non-Member Functions
-
 short randInterval(const int lower, const int upper)
 {
   return (rand() % upper) + lower;
@@ -29,9 +30,9 @@ short randInterval(const int lower, const int upper)
 
 bool nameTaken(const int nameNumber)
 {
-  for(int i = 0; i < Customer::cNumNamesUsed; i++)
+  for(int i : Customer::cNamesUsed)
   {
-    if(nameNumber == Customer::cNamesUsed[i])
+    if(nameNumber == i)
       return true;
   }
   return false;
@@ -59,12 +60,10 @@ ostream& operator << (ostream& os, Customer& c)
 
 Customer::Customer()
 {
-  ifstream name;
-  int nameNumber;
-  int numNames = 24;
-  name.open("simpson_names.dat");
 
   // Select random name
+  int numNames = 24;
+  int nameNumber;
   do
   {
     nameNumber = randInterval(1, numNames);
@@ -72,14 +71,12 @@ Customer::Customer()
   while(nameTaken(nameNumber));
 
   // Assign Name to current Customer
+  ifstream name("simpson_names.dat");
   for(int i = 1; i <= nameNumber; i++)
-    name.getline(cName, MAX_NAME_LENGTH);
+    std::getline(name, cName);
 
   // Place currently used name into catalog of used names
-  Customer::cNamesUsed[Customer::cNumNamesUsed] = nameNumber;
-
-  // Increment Names Used
-  Customer::cNumNamesUsed++;
+  Customer::cNamesUsed.push_back(nameNumber);
 
   // Randomize Weight
   cWeight = randInterval(MIN_WEIGHT, MAX_WEIGHT);
@@ -128,7 +125,7 @@ void Customer::eat(Burger burg)
   {
     // Increase Customer's Cholesterol Level
     cCholesterolLevel += 2.5 * burg.getNumBacon()
-                      + (PI / 2) * burg.getNumPatties()
+                      + (M_PI / 2) * burg.getNumPatties()
                       + cWeight / ((burg.getNumPickles() + 1) * 10);
 
     // Calculate Anticipated Weight Change
@@ -164,60 +161,13 @@ void Customer::eat(Burger burg)
 
 // Get Value Functions
 
-int getNumLiving(Customer contestants[])
+int getNumLiving(Contestants& con)
 {
   int numAlive = 0;
-  for(int i = 0; i < CONTESTANTS; i++)
+  for(Customer& cus : con)
   {
-    if(contestants[i].getAlive())
+    if(cus.getAlive())
       numAlive++;
   }
   return numAlive;
 }
-
-int Customer::getWeight() const
-{
-  return cWeight;
-}
-
-short Customer::getChol() const
-{
-  return cCholesterolLevel;
-}
-
-double Customer::getCash() const
-{
-  return cCash;
-}
-
-bool Customer::getAlive() const
-{
-  return cIsAlive;
-}
-
-void Customer::getName() const
-{
-  int i = 0;
-  while (cName[i] != '\0')
-  {
-    cout << cName[i];
-    i++;
-  }
-}
-
-int Customer::getHealth() const
-{
-  return cHealth;
-}
-
-/*
-int Customer::getNamesUsed()
-{
-  return cNamesUsed;
-}
-
-int Customer::getNumNamesUsed()
-{
-  return cNumNamesUsed;
-}
-*/

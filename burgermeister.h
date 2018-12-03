@@ -5,15 +5,14 @@
 // File:         burgermeister.h
 // Description:
 
-#ifndef BURGERMEISTER_H
-#define BURGERMEISTER_H
+#pragma once
 
 #include <iostream>
 #include <string>
+using namespace std;
+
 #include "burger.h"
 #include "customer.h"
-
-using namespace std;
 
 // Constants
 const string NAME = "Krusty";
@@ -31,16 +30,14 @@ class BurgerMeister
     // BurgerMeister Actions
     void disqualifyContestant(Customer& c);
     // Get Functions
-    string getName() const;
-    double getCash() const;
+    string getName() const { return bmName; }
+    float getCash() const { return bmCash; }
   private:
     string bmName;
-    double bmCash;
+    float bmCash;
 };
 
 // Non-Member Functions
 ostream& operator << (ostream& os, BurgerMeister& bm);
 
-void feedCustomers(Customer contestants[]);
-
-#endif
+void feedCustomers(Contestants&);

@@ -71,38 +71,6 @@ Burger::Burger()
   setPrice();
 }
 
-// Set Functions
-
-void Burger::setNumPatties(const int patties)
-{
-  bNumPatties = patties;
-}
-
-void Burger::setNumBacon(const int bacon)
-{
-  bNumBacon = bacon;
-}
-
-void Burger::setNumPickles(const int pickles)
-{
-  bNumPickles = pickles;
-}
-
-void Burger::setCheese(const bool cheese)
-{
-  bHasCheese = cheese;
-}
-
-void Burger::setSpecialSauce(const bool sauce)
-{
-  bHasSpecialSauce = sauce;
-}
-
-void Burger::setPathogen(const bool pathogen)
-{
-  bHasPathogen = pathogen;
-}
-
 void Burger::setName()
 {
   // Decide Burger Name based on ingredients
@@ -177,46 +145,4 @@ void Burger::setPrice()
     bPrice += CHEESE_PRICE;
   if(bHasSpecialSauce)
     bPrice += SAUCE_PRICE;
-}
-
-// Get Functions
-
-int Burger::getNumPatties()
-{
-  return bNumPatties;
-}
-
-int Burger::getNumBacon()
-{
-  return bNumBacon;
-}
-
-int Burger::getNumPickles()
-{
-  return bNumPickles;
-}
-
-double Burger::getPrice()
-{
-  return bPrice;
-}
-
-bool Burger::getCheese()
-{
-  return bHasCheese;
-}
-
-bool Burger::getSpecialSauce()
-{
-  return bHasSpecialSauce;
-}
-
-bool Burger::getPathogen()
-{
-  return bHasPathogen;
-}
-
-string Burger::getName()
-{
-  return bName;
 }
