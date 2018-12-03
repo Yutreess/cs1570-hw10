@@ -26,8 +26,8 @@ class BurgerMeister
       // Constructor
     BurgerMeister();
     // Member operator Overloads
-    BurgerMeister& operator += (float cash);
-    BurgerMeister& operator -= (float cash);
+    BurgerMeister& operator += (const double cash);
+    BurgerMeister& operator -= (const double cash);
     // BurgerMeister Actions
     void disqualifyContestant(Customer& c);
     // Get Functions

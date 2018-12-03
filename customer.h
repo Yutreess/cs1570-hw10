@@ -41,10 +41,10 @@ const double MAX_CASH = 75.0;
 const int MAX_HEALTH = 100;
 // Vomit Dialogue
 const string VOMIT_DIALOGUE[4] = {
-                                  "BLEEHHLECH",
-                                  "GURGLAHCH",
-                                  "PAGHLAECH",
-                                  "JELECHAAM"}
+                                  "BLEEHHLECH!",
+                                  "GURGLAHCH!!",
+                                  "PAGHLAECH!!!",
+                                  "JELECHAAM!"};
 
 // Customer Class
 class Customer
@@ -53,11 +53,16 @@ class Customer
     // To use for storing previously used names
     static int cNamesUsed[CONTESTANTS];
     static int cNumNamesUsed;
+    //
     static int cAreLiving;
+    // Contest BurgerMeister
     static BurgerMeister Krusty;
 
     // Constructors
     Customer();
+
+    // Member operator Overloads
+    //Customer& operator -= (const double price);
 
     // Customer Actions
     void eat(Burger burg);
@@ -65,7 +70,7 @@ class Customer
     void toss();
 
     // Get Value Functions
-    int getNumLiving(Customer contestants[]);
+
     int getWeight() const;
     short getChol() const;
     double getCash() const;
@@ -85,11 +90,10 @@ class Customer
 
 short randInterval(const int lower, const int upper);
 
-ostream& operator << (ostream& os, Customer& c);
-
-//void feedCustomers(Customer contestants[]);
-
 bool nameTaken(const int nameNumber);
 
+ostream& operator << (ostream& os, Customer& c);
+
+int getNumLiving(Customer contestants[]);
 
 #endif

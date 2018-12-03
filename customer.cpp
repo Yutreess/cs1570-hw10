@@ -37,6 +37,17 @@ bool nameTaken(const int nameNumber)
   return false;
 }
 
+int getNumLiving(Customer contestants[])
+{
+  int numAlive = 0;
+  for(int i = 0; i < CONTESTANTS; i++)
+  {
+    if(contestants[i].getAlive())
+      numAlive++;
+  }
+  return numAlive;
+}
+
 ostream& operator << (ostream& os, Customer& c)
 {
   // Name
@@ -111,7 +122,7 @@ void Customer::eat(Burger burg)
   {
     cout << "This Customer is dead." << endl;
   }
-  else if(burg.getPathogen())
+  if(burg.getPathogen())
   {
     if(randInterval(1, 101) > cHealth)
       cIsAlive = false;
@@ -120,9 +131,8 @@ void Customer::eat(Burger burg)
       // Cut Health in Half
       cHealth /= 2;
       // Vomits
-
+      vomit();
     }
-
   }
   else
   {
@@ -162,18 +172,14 @@ void Customer::eat(Burger burg)
   }
 }
 
-// Get Value Functions
-
-int getNumLiving(Customer contestants[])
+void Customer::vomit()
 {
-  int numAlive = 0;
-  for(int i = 0; i < CONTESTANTS; i++)
-  {
-    if(contestants[i].getAlive())
-      numAlive++;
-  }
-  return numAlive;
+  cout << cName << " barfs "
+  << VOMIT_DIALOGUE[randInterval(0, 3)] << " "
+  << VOMIT_DIALOGUE[randInterval(0, 3)] << endl;
 }
+
+// Get Value Functions
 
 int Customer::getWeight() const
 {

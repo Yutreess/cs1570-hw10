@@ -20,14 +20,15 @@ BurgerMeister::BurgerMeister()
   bmName = NAME;
   bmCash = INITIAL_CASH;
 }
-
-BurgerMeister& BurgerMeister::operator += (float cash)
+// friend
+// BurgerMeister& operator+=(const double& rhs);
+BurgerMeister& BurgerMeister::operator += (const double cash)
 {
   bmCash = bmCash + cash;
   return *this;
 }
 
-BurgerMeister& BurgerMeister::operator -= (float cash)
+BurgerMeister& BurgerMeister::operator -= (const double cash)
 {
   bmCash = bmCash - cash;
   return *this;
@@ -60,14 +61,19 @@ void feedCustomers(Customer contestants[])
 
   for(int i = 0; i < CONTESTANTS; i++)
   {
-    // Contestant Eats the burger
-    contestants[i].eat(burg);
+    // If Customer is Alive
+    // AND Customer can afford Burger
+    if(contestants[i].getAlive()
+       && contestants[i].getCash() > burg.getPrice())
+    {
+      // Contestant Eats the burger
+      contestants[i].eat(burg);
 
-    // Output name of the contestant who ate
-    contestants[i].getName();
-    cout << " eats "
-    << burg.getName() << endl;
-
+      // Output name of the contestant who ate
+      contestants[i].getName();
+      cout << " eats "
+      << burg.getName() << endl;
+    }
     // Output customer stats
     cout << "-----" << contestants[i] << endl;
   }

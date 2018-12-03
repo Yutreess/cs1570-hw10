@@ -18,7 +18,7 @@ int main()
   srand(time(0));
 
   // Round #
-  int round = 1;
+  int round = 0;
 
   // Array of Contestants
   // (CONTESTANTS defined in customer.h)
@@ -41,11 +41,21 @@ int main()
     cout << i+1 << ":\t"
     << contestants[i] << endl;
 
-  // Play rounds
-  cout << "------------------------ "
-  << "ROUND #" << round
-  << " -------------------" << endl;
 
-  feedCustomers(contestants);
+
+  do
+  {
+    // Start round by updating round #
+    round++;
+    // Display current round
+    cout << "------------------------ "
+    << "ROUND #" << round
+    << " -------------------" << endl;
+
+    feedCustomers(contestants);
+  }
+  while(getNumLiving(contestants) != 1);
+  // With only 1 living Customer, find that customer.
+  
   return 0;
 }
