@@ -8,16 +8,13 @@
 #ifndef BURGERMEISTER_H
 #define BURGERMEISTER_H
 
+#include "main.h"
 #include <iostream>
-//#include <string>
+#include <string>
 #include "burger.h"
 #include "customer.h"
 
 using namespace std;
-
-// Constants
-const string NAME = "Krusty";
-const int INITIAL_CASH = 100;
 
 // Burgermeister Class
 class BurgerMeister

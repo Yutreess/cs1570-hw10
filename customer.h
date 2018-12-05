@@ -19,33 +19,6 @@ class BurgerMeister;
 
 using namespace std;
 
-// Numerical Constants
-const double PI = 3.14;
-const int CONTESTANTS = 15;
-// Name Length
-const int MAX_NAME_LENGTH = 30;
-// Cholestorol Levels
-const int MIN_CHOL = 30;
-const int MAX_CHOL = 300;
-// Initial Weight
-const int MIN_WEIGHT = 90;
-const int MAX_WEIGHT = 250;
-const int MAX_WEIGHT_GAIN = 80;
-// Weight Gain
-const double WT_FROM_CHEESE = 1.2;
-const double WT_FROM_SAUCE  = 2.1;
-// Cash
-const double MIN_CASH = 25.0;
-const double MAX_CASH = 75.0;
-// Health
-const int MAX_HEALTH = 100;
-// Vomit Dialogue
-const string VOMIT_DIALOGUE[4] = {
-                                  "BLEEHHLECH!",
-                                  "GURGLAHCH!!",
-                                  "PAGHLAECH!!!",
-                                  "JELECHAAM!"};
-
 // Customer Class
 class Customer
 {
@@ -53,7 +26,7 @@ class Customer
     // To use for storing previously used names
     static int cNamesUsed[CONTESTANTS];
     static int cNumNamesUsed;
-    //
+    // Number of Customers Alive
     static int cAreLiving;
     // Contest BurgerMeister
     static BurgerMeister Krusty;
@@ -64,13 +37,16 @@ class Customer
     // Member operator Overloads
     //Customer& operator -= (const double price);
 
+    // Reset Functions
+    void nullVomitted();
     // Customer Actions
     void eat(Burger burg);
     void vomit();
-    void toss();
+    void toss(Customer& victim, Burger tBurg);
     void payBurgerMeister(Burger burg);
 
     // Get Value Functions
+
 
     int getWeight() const { return cWeight; };
     short getChol() const { return cCholesterolLevel; };
@@ -78,12 +54,14 @@ class Customer
     bool getAlive() const { return cIsAlive; };
     void getName() const;
     int getHealth() const { return cHealth; };
+    bool getHasVomitted() const { return cVomitted; };
   private:
     int cWeight;
     short cCholesterolLevel;
     double cCash;
     int cHealth;
     bool cIsAlive;
+    bool cVomitted;
     char cName[MAX_NAME_LENGTH];
 };
 
@@ -96,5 +74,7 @@ bool nameTaken(const int nameNumber);
 ostream& operator << (ostream& os, Customer& c);
 
 int getNumLiving(Customer contestants[]);
+
+int nameCount(ifstream & in);
 
 #endif

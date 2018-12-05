@@ -37,16 +37,7 @@ bool nameTaken(const int nameNumber)
   return false;
 }
 
-int getNumLiving(Customer contestants[])
-{
-  int numAlive = 0;
-  for(int i = 0; i < CONTESTANTS; i++)
-  {
-    if(contestants[i].getAlive())
-      numAlive++;
-  }
-  return numAlive;
-}
+
 
 ostream& operator << (ostream& os, Customer& c)
 {
@@ -66,16 +57,49 @@ ostream& operator << (ostream& os, Customer& c)
   return os;
 }
 
+int getNumLiving(Customer contestants[])
+{
+  int numAlive = 0;
+  for(int i = 0; i < CONTESTANTS; i++)
+  {
+    if(contestants[i].getAlive())
+      numAlive++;
+  }
+  return numAlive;
+}
+
+int nameCount(ifstream& in)
+{
+  // Allows the usage of the getline, no other purpose
+  string temp;
+  int numNames = 0;
+
+  // Program will halt until connection to file established
+  do
+  {
+    in.clear();
+    in.open("simpson_names.dat");
+  } while(!in);
+
+  while (getline(in, temp, '\n'))
+  {
+    numNames++;
+  }
+
+  in.close();
+  return numNames;
+}
+
 // Constructors
 
 Customer::Customer()
 {
   ifstream name;
   int nameNumber;
-  int numNames = 24;
+  int numNames = nameCount(name);
   name.open("simpson_names.dat");
 
-  // Select random name
+  // Select random unused name
   do
   {
     nameNumber = randInterval(1, numNames);
@@ -102,9 +126,16 @@ Customer::Customer()
   cIsAlive = true;
   // Set Health
   cHealth = MAX_HEALTH;
-
+  //cHealth = randInterval(MIN_HEALTH, MAX_HEALTH);
+  // They haven't vommitted.... yet.
+  cVomitted = false;
   // Close names file
   name.close();
+}
+
+void Customer::nullVomitted()
+{
+  cVomitted = false;
 }
 
 void Customer::eat(Burger burg)
@@ -113,8 +144,7 @@ void Customer::eat(Burger burg)
   int weightChange;
 
   // Customer pays for Burger
-  cCash -= burg.getPrice();
-  Customer::Krusty += burg.getPrice();
+  payBurgerMeister(burg);
 
   //TODO: Add Burger Price to BurgerMeister
   //      += burg.getPrice();
@@ -125,7 +155,10 @@ void Customer::eat(Burger burg)
   if(burg.getPathogen())
   {
     if(randInterval(1, 101) > cHealth)
+    {
       cIsAlive = false;
+      cVomitted = false;
+    }
     else
     {
       // Cut Health in Half
@@ -156,52 +189,62 @@ void Customer::eat(Burger burg)
     if(weightChange >= MAX_WEIGHT_GAIN)
     {
       cIsAlive = false;
+      Customer::Krusty -= DEATH_COST;
+      cVomitted = false;
     }
 
-    // Cholesterol is above 300
+    // or if Cholesterol is above 300
     else if(cCholesterolLevel >= MAX_CHOL)
     {
       cIsAlive = false;
+      Customer::Krusty -= DEATH_COST;
+      cVomitted = false;
     }
 
-    // Health goes to 0
-    else if(cHealth <= 0)
+    // or if Health goes to 0
+    else if(cHealth < MIN_HEALTH)
     {
       cIsAlive = false;
+      Customer::Krusty -= DEATH_COST;
+      cVomitted = false;
     }
   }
 }
 
 void Customer::vomit()
 {
-  cout << cName << " barfs "
+  // Set HasVomitted to true
+  cVomitted = true;
+
+  // Customer Vomitting dialogue
+  cout << "|||||" << cName << " barfs "
   << VOMIT_DIALOGUE[randInterval(0, 3)] << " "
   << VOMIT_DIALOGUE[randInterval(0, 3)] << endl;
+  // Krusty pays for cleanup. It doesn't get done, but he pays nonetheless.
+  Customer::Krusty -= VOMITTING_COST;
 }
 
-// Get Value Functions
-
-/*
-int Customer::getWeight() const
+void Customer::toss(Customer& victim, Burger tBurg)
 {
-  return cWeight;
+  // Health increases by 2
+  cHealth += 2;
+
+  // Pay burgerMeister for thrown Burger
+  payBurgerMeister(tBurg);
+
+  // Announce the throw
+  cout << "##### " << cName << " yeets burger at ";
+  victim.getName();
+  cout << endl;
 }
 
-short Customer::getChol() const
+void Customer::payBurgerMeister(Burger burg)
 {
-  return cCholesterolLevel;
+  cCash -= burg.getPrice();
+  Customer::Krusty += burg.getPrice();
 }
 
-double Customer::getCash() const
-{
-  return cCash;
-}
 
-bool Customer::getAlive() const
-{
-  return cIsAlive;
-}
-*/
 
 void Customer::getName() const
 {

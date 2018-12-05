@@ -32,6 +32,9 @@ int main()
   cout.setf(ios::showpoint);
   cout.precision(2);
 
+  // Greeting Statement
+  cout << "Welcome, Springfield. To the annual Burger Eating Contest!" << endl;
+
   // Announce
   cout << "Let the Burger Eating Contest Commence!" << endl;
 
@@ -47,12 +50,13 @@ int main()
     // Display current round
     cout << "------------------------ "
     << "ROUND #" << round
-    << " -------------------" << endl;
+    << " ------------------------" << endl;
 
-    // Feed Customers
+    // Feed Customer
+
     feedCustomers(contestants);
   }
-  while(getNumLiving(contestants) != 1);
+  while(getNumLiving(contestants) > 2);
   // With only 1 living Customer, find that customer.
 
   return 0;

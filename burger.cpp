@@ -5,11 +5,6 @@
 // File:         burger.cpp
 // Description:
 
-#include <string>
-#include <iostream>
-#include <cstdlib>
-#include <fstream>
-#include <cmath>
 #include "burger.h"
 using namespace std;
 
@@ -177,46 +172,4 @@ void Burger::setPrice()
     bPrice += CHEESE_PRICE;
   if(bHasSpecialSauce)
     bPrice += SAUCE_PRICE;
-}
-
-// Get Functions
-
-int Burger::getNumPatties()
-{
-  return bNumPatties;
-}
-
-int Burger::getNumBacon()
-{
-  return bNumBacon;
-}
-
-int Burger::getNumPickles()
-{
-  return bNumPickles;
-}
-
-double Burger::getPrice()
-{
-  return bPrice;
-}
-
-bool Burger::getCheese()
-{
-  return bHasCheese;
-}
-
-bool Burger::getSpecialSauce()
-{
-  return bHasSpecialSauce;
-}
-
-bool Burger::getPathogen()
-{
-  return bHasPathogen;
-}
-
-string Burger::getName()
-{
-  return bName;
 }
