@@ -10,7 +10,7 @@
 
 #include <string>
 #include <iostream>
-#include <cstdlib>
+//#include <cstdlib>
 #include <fstream>
 #include <cmath>
 #include "burger.h"
@@ -68,15 +68,16 @@ class Customer
     void eat(Burger burg);
     void vomit();
     void toss();
+    void payBurgerMeister(Burger burg);
 
     // Get Value Functions
 
-    int getWeight() const;
-    short getChol() const;
-    double getCash() const;
-    bool getAlive() const;
+    int getWeight() const { return cWeight; };
+    short getChol() const { return cCholesterolLevel; };
+    double getCash() const { return cCash; };
+    bool getAlive() const { return cIsAlive; };
     void getName() const;
-    int getHealth() const;
+    int getHealth() const { return cHealth; };
   private:
     int cWeight;
     short cCholesterolLevel;

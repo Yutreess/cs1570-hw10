@@ -9,7 +9,7 @@
 #define BURGERMEISTER_H
 
 #include <iostream>
-#include <string>
+//#include <string>
 #include "burger.h"
 #include "customer.h"
 
@@ -31,8 +31,8 @@ class BurgerMeister
     // BurgerMeister Actions
     void disqualifyContestant(Customer& c);
     // Get Functions
-    string getName() const;
-    double getCash() const;
+    string getName() const {return bmName; };
+    double getCash() const {return bmCash; };
   private:
     string bmName;
     double bmCash;

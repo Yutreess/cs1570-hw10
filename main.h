@@ -11,11 +11,12 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
-#include <fstream>
 #include <cmath>
-#include "burger.h"
-#include "burgermeister.h"
-#include "customer.h"
+//#include "burger.h"
+//#include "burgermeister.h"
+//#include "customer.h"
+
+using namespace std;
 
 // Numerical Constants
 const double PI = 3.14;

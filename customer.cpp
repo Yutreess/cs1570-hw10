@@ -159,13 +159,13 @@ void Customer::eat(Burger burg)
     }
 
     // Cholesterol is above 300
-    if(cCholesterolLevel >= MAX_CHOL)
+    else if(cCholesterolLevel >= MAX_CHOL)
     {
       cIsAlive = false;
     }
 
     // Health goes to 0
-    if(cHealth <= 0)
+    else if(cHealth <= 0)
     {
       cIsAlive = false;
     }
@@ -181,6 +181,7 @@ void Customer::vomit()
 
 // Get Value Functions
 
+/*
 int Customer::getWeight() const
 {
   return cWeight;
@@ -200,6 +201,7 @@ bool Customer::getAlive() const
 {
   return cIsAlive;
 }
+*/
 
 void Customer::getName() const
 {
@@ -211,17 +213,18 @@ void Customer::getName() const
   }
 }
 
+/*
 int Customer::getHealth() const
 {
   return cHealth;
 }
+*/
 
 /*
 int Customer::getNamesUsed()
 {
   return cNamesUsed;
 }
-
 int Customer::getNumNamesUsed()
 {
   return cNumNamesUsed;

@@ -5,9 +5,9 @@
 // File:         main.cpp
 // Description:
 
-#include <string>
+//#include <string>
 #include <iostream>
-#include <cstdlib>
+//#include <cstdlib>
 #include "burgermeister.h"
 #include "customer.h"
 using namespace std;
@@ -38,10 +38,7 @@ int main()
   // Print Contestants
   cout << "The Contestants Are:" << endl;
   for(int i = 0; i < CONTESTANTS; i++)
-    cout << i+1 << ":\t"
-    << contestants[i] << endl;
-
-
+    cout << i+1 << ":\t" << contestants[i] << endl;
 
   do
   {
@@ -52,10 +49,11 @@ int main()
     << "ROUND #" << round
     << " -------------------" << endl;
 
+    // Feed Customers
     feedCustomers(contestants);
   }
   while(getNumLiving(contestants) != 1);
   // With only 1 living Customer, find that customer.
-  
+
   return 0;
 }

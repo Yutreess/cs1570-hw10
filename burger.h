@@ -8,9 +8,9 @@
 #ifndef BURGER_H
 #define BURGER_H
 
-#include <string>
+//#include <string>
 #include <iostream>
-#include <cstdlib>
+//#include <cstdlib>
 using namespace std;
 
 // Constants
@@ -76,15 +76,17 @@ class Burger
     void setPathogen(const bool pathogen);
     void setName();
     void setPrice();
+
     // Get Functions
-    int getNumPatties();
-    int getNumBacon();
-    int getNumPickles();
-    double getPrice();
-    bool getCheese();
-    bool getSpecialSauce();
-    bool getPathogen();
-    string getName();
+    int getNumPatties() const {return bNumPatties; };
+    int getNumBacon() const {return bNumBacon; };
+    int getNumPickles() const {return bNumPickles; };
+    double getPrice() const {return bPrice; };
+    bool getCheese() const {return bHasCheese; };
+    bool getSpecialSauce() const {return bHasSpecialSauce; };
+    bool getPathogen() const {return bHasPathogen; };
+    string getName() const {return bName; };
+
   private:
     int bNumPatties;
     int bNumBacon;
